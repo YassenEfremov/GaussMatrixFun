@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://34gaqbn5exm0"]
+
+[ext_resource type="PackedScene" uid="uid://lj4ns46eff7g" path="res://scenes/row_slot.tscn" id="1_0ah51"]
+[ext_resource type="Script" path="res://scripts/gauss_mode.gd" id="1_cmbab"]
+[ext_resource type="Script" path="res://scripts/safe_area.gd" id="1_q5smv"]
+[ext_resource type="PackedScene" uid="uid://ddjews4qv80rc" path="res://scenes/row.tscn" id="2_aoq57"]
+
+[node name="Main" type="Node"]
+
+[node name="GaussMode" type="Node2D" parent="."]
+script = ExtResource("1_cmbab")
+
+[node name="a_1" parent="GaussMode" instance=ExtResource("1_0ah51")]
+position = Vector2(300, 300)
+
+[node name="a_2" parent="GaussMode" instance=ExtResource("1_0ah51")]
+position = Vector2(300, 370)
+
+[node name="a_3" parent="GaussMode" instance=ExtResource("1_0ah51")]
+position = Vector2(300, 440)
+
+[node name="a_4" parent="GaussMode" instance=ExtResource("1_0ah51")]
+position = Vector2(300, 510)
+
+[node name="Row1" parent="GaussMode" instance=ExtResource("2_aoq57")]
+position = Vector2(300, 300)
+
+[node name="Row2" parent="GaussMode" instance=ExtResource("2_aoq57")]
+position = Vector2(300, 370)
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q5smv")
+
+[node name="UI" type="Control" parent="SafeArea"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="GaussView" type="Control" parent="SafeArea/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="SafeArea/UI/GaussView"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.937255, 0.937255, 0.937255, 1)
+
+[node name="DeterminantView" type="Control" parent="SafeArea/UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

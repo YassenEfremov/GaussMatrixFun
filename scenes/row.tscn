@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddjews4qv80rc"]
+
+[ext_resource type="Script" path="res://scripts/row.gd" id="1_ulu66"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srmvi"]
+size = Vector2(384, 64)
+
+[node name="Row" type="Node2D"]
+script = ExtResource("1_ulu66")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -192.0
+offset_top = -32.0
+offset_right = 192.0
+offset_bottom = 32.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = -176.0
+offset_top = -48.0
+offset_right = 176.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "x_1 + x_2 + x_3 + x_4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_srmvi")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
