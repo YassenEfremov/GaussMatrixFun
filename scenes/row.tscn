@@ -8,20 +8,61 @@ size = Vector2(384, 64)
 [node name="Row" type="Node2D"]
 script = ExtResource("1_ulu66")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Label1" type="Label" parent="."]
+z_index = 1
 offset_left = -192.0
+offset_top = -32.0
+offset_right = -128.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+z_index = 1
+offset_left = -128.0
+offset_top = -32.0
+offset_right = -64.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+z_index = 1
+offset_left = -64.0
+offset_top = -32.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+z_index = 1
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="."]
+z_index = 1
+offset_left = 64.0
 offset_top = -32.0
 offset_right = 192.0
 offset_bottom = 32.0
-
-[node name="Label" type="Label" parent="."]
-offset_left = -176.0
-offset_top = -48.0
-offset_right = 176.0
-offset_bottom = 48.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
-text = "x_1 + x_2 + x_3 + x_4"
+theme_override_font_sizes/font_size = 40
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
