@@ -43,11 +43,19 @@ offset_right = 274.0
 offset_bottom = 280.0
 color = Color(0, 0, 0, 1)
 
+[connection signal="decided" from="Rows/1/1" to="." method="on_decided"]
+[connection signal="dragged" from="Rows/1/1" to="." method="on_dragged"]
 [connection signal="dropped" from="Rows/1/1" to="." method="row_dropped"]
 [connection signal="picked_up" from="Rows/1/1" to="." method="row_picked_up"]
+[connection signal="decided" from="Rows/2/2" to="." method="on_decided"]
+[connection signal="dragged" from="Rows/2/2" to="." method="on_dragged"]
 [connection signal="dropped" from="Rows/2/2" to="." method="row_dropped"]
 [connection signal="picked_up" from="Rows/2/2" to="." method="row_picked_up"]
+[connection signal="decided" from="Rows/3/3" to="." method="on_decided"]
+[connection signal="dragged" from="Rows/3/3" to="." method="on_dragged"]
 [connection signal="dropped" from="Rows/3/3" to="." method="row_dropped"]
 [connection signal="picked_up" from="Rows/3/3" to="." method="row_picked_up"]
+[connection signal="decided" from="Rows/4/4" to="." method="on_decided"]
+[connection signal="dragged" from="Rows/4/4" to="." method="on_dragged"]
 [connection signal="dropped" from="Rows/4/4" to="." method="row_dropped"]
 [connection signal="picked_up" from="Rows/4/4" to="." method="row_picked_up"]
