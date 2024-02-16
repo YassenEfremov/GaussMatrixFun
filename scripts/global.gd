@@ -1,3 +1,3 @@
 extends Control
 
-var selected_row
+#var selected_row

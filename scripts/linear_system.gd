@@ -39,7 +39,7 @@ func row_picked_up(row: Row, slot):
 	
 	selected_row.reparent($Dragging)
 
-func on_dragged(row: Row):
+func on_dragged(row: Row, velocity: float):
 	for row_slot in $Rows.get_children():
 		slot_distances[row_slot] = row_slot.global_position.distance_to(selected_row.global_position)
 	var new_closest = slot_distances.find_key(slot_distances.values().min())
@@ -63,11 +63,11 @@ func on_dragged(row: Row):
 						shift_up(new_closest.get_index() - 1)
 				closest_slot = new_closest
 		elif slot_distances.find_key(slot_distances.values().min()).get_children().size() > 2:		# BAD CODE!!!
-			slot_distances.find_key(slot_distances.values().min()).modulate = Color.DODGER_BLUE
-			swap = true
+			slot_distances.find_key(slot_distances.values().min()).modulate = Color.GRAY
+			#swap = true	?
 		
 		decided = false
-	else:
+	elif velocity > 200:
 		new_closest.modulate = Color.WHITE
 
 func row_dropped(row: Row):
@@ -78,30 +78,27 @@ func row_dropped(row: Row):
 	#else:
 		#row.reparent(selected_slot)
 	#closest_slot = null
-	if swap:
-		# This works better
-		for r in $Rows.get_children():
-			if r.get_children().size() <= 2:
-				row.reparent(r)
-		
-		var tween = get_tree().create_tween()
-		tween.tween_property(row, "position", Vector2.ZERO, 0.2).set_ease(Tween.EASE_OUT)
-	else:
+	
+	var closest = slot_distances.find_key(slot_distances.values().min())
+	if not swap and closest.get_children().size() > 2:	# BAD CODE!!!
 		# add/subtract here
-		for r in $Rows.get_children():
-			if r.get_children().size() <= 2:
-				row.reparent(r)
-				print("reparented to row ", r.get_index())
-		
-		var tween = get_tree().create_tween()
-		tween.tween_property(row, "position", Vector2.ZERO, 0.2).set_ease(Tween.EASE_OUT)
+		for i in row.values.size():
+			closest.get_child(2).values[i] += row.values[i]
+			closest.get_child(2).get_node("Label%s" % (i+1)).text = str(closest.get_child(2).values[i])
 		
 		swap = true
+	
+	# Return the selected row back
+	for r in $Rows.get_children():
+		if r.get_children().size() <= 2:
+			row.reparent(r)
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(row, "position", Vector2.ZERO, 0.2).set_ease(Tween.EASE_OUT)
+	
 	slot_distances.find_key(slot_distances.values().min()).modulate = Color.WHITE
 
-
-func on_decided():	# Gets spammed for some reason?
+func on_decided():	# This gets spammed a lot when holding the selected row still
 	if slot_distances.values().min() < 20:
 		swap = false
 	decided = true
-	print("decided")
