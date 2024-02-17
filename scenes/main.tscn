@@ -16,11 +16,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q5smv")
 
-[node name="UI" type="Control" parent="SafeArea"]
+[node name="GUI" type="Control" parent="SafeArea"]
 layout_mode = 2
 mouse_filter = 1
 
-[node name="GaussView" type="Control" parent="SafeArea/UI"]
+[node name="GaussView" type="Control" parent="SafeArea/GUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="ColorRect" type="ColorRect" parent="SafeArea/UI/GaussView"]
+[node name="ColorRect" type="ColorRect" parent="SafeArea/GUI/GaussView"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -37,9 +37,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 
-[node name="DeterminantView" type="Control" parent="SafeArea/UI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="DeterminantView" type="Control" parent="SafeArea/GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

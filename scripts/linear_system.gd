@@ -10,6 +10,7 @@ var slot_distances = {}
 var closest_slot
 var swap: bool = true
 var decided: bool = false
+var divider_scene = preload("res://scenes/divider.tscn")
 
 
 func shift_down(i):
@@ -64,7 +65,7 @@ func on_dragged(row: Row, velocity: float):
 				closest_slot = new_closest
 		elif slot_distances.find_key(slot_distances.values().min()).get_children().size() > 2:		# BAD CODE!!!
 			slot_distances.find_key(slot_distances.values().min()).modulate = Color.GRAY
-			#swap = true	?
+			#swap = true		# breaks row addition/subtraction
 		
 		decided = false
 	elif velocity > 200:
@@ -86,19 +87,33 @@ func row_dropped(row: Row):
 			closest.get_child(2).values[i] += row.values[i]
 			closest.get_child(2).get_node("Label%s" % (i+1)).text = str(closest.get_child(2).values[i])
 		
+		var row_gcd: int = Global.gcd(closest.get_child(2).values)
+		if row_gcd != 1:
+			var divider: Button = divider_scene.instantiate()
+			divider.row = closest.get_child(2)
+			divider.value = row_gcd
+			$"/root/Main/SafeArea/GUI/GaussView".add_child(divider)
+		
 		swap = true
 	
 	# Return the selected row back
 	for r in $Rows.get_children():
 		if r.get_children().size() <= 2:
 			row.reparent(r)
+			#print("reparent")
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(row, "position", Vector2.ZERO, 0.2).set_ease(Tween.EASE_OUT)
+	#print("zero")
 	
-	slot_distances.find_key(slot_distances.values().min()).modulate = Color.WHITE
+	if slot_distances.find_key(slot_distances.values().min()):
+		slot_distances.find_key(slot_distances.values().min()).modulate = Color.WHITE
 
 func on_decided():	# This gets spammed a lot when holding the selected row still
 	if slot_distances.values().min() < 20:
 		swap = false
 	decided = true
+
+
+#func on_clicked(row: Row):
+	#selected_slot.modulate = Color.WHITE if row.locked else Color.GRAY
