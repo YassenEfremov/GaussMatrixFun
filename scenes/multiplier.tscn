@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4uap0cpebp1o"]
+
+[ext_resource type="Script" path="res://scripts/multiplier.gd" id="1_3jc1n"]
+[ext_resource type="Texture2D" uid="uid://b0rgq8gienius" path="res://assets/checkmark.png" id="2_14t1d"]
+[ext_resource type="Texture2D" uid="uid://dcmqxqeg84g1x" path="res://assets/crossmark.png" id="3_aa41c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24ijq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qg7y4"]
+bg_color = Color(0.6, 0.6, 0.6, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbgsi"]
+bg_color = Color(0.6, 0.6, 0.6, 0.6)
+
+[node name="Multiplier" type="Label"]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_24ijq")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_3jc1n")
+metadata/_edit_use_anchors_ = true
+
+[node name="Increase" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = -32.0
+offset_right = 80.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_qg7y4")
+text = ">"
+metadata/_edit_use_anchors_ = true
+
+[node name="Decrease" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -32.0
+offset_right = -48.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_qbgsi")
+text = "<"
+metadata/_edit_use_anchors_ = true
+
+[node name="Apply" type="Button" parent="."]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 80.0
+offset_right = 24.0
+offset_bottom = 144.0
+icon = ExtResource("2_14t1d")
+expand_icon = true
+
+[node name="Cancel" type="Button" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 80.0
+offset_right = 104.0
+offset_bottom = 144.0
+icon = ExtResource("3_aa41c")
+expand_icon = true
+
+[connection signal="pressed" from="Increase" to="." method="_on_increase_pressed"]
+[connection signal="pressed" from="Decrease" to="." method="_on_decrease_pressed"]
+[connection signal="pressed" from="Apply" to="." method="_on_apply_pressed"]
+[connection signal="pressed" from="Cancel" to="." method="_on_cancel_pressed"]

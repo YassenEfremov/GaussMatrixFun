@@ -5,12 +5,14 @@ class_name LinearSystem extends Node2D
 var number_of_rows = 4
 
 var selected_row: Row
-var selected_slot
+var selected_slot: RowSlot
 var slot_distances = {}
-var closest_slot
+var closest_slot: RowSlot
 var swap: bool = true
 var decided: bool = false
-var divider_scene = preload("res://scenes/divider.tscn")
+var multiplier: Multiplier = null
+var multiplier_scene := preload("res://scenes/multiplier.tscn")
+var locked: bool = false
 
 
 func shift_down(i):
@@ -33,7 +35,7 @@ func move_row(from_i: int, to_i: int):
 	tween.tween_property($Rows.get_child(to_i).get_child(2), "position", Vector2.ZERO, 0.2).set_ease(Tween.EASE_OUT)
 	#print(from_i, " -> ", to_i)
 
-func row_picked_up(row: Row, slot):
+func row_picked_up(row: Row, slot: RowSlot):
 	selected_row = row
 	selected_slot = slot
 	closest_slot = selected_slot
@@ -85,12 +87,13 @@ func row_dropped(row: Row):
 		if r.get_children().size() <= 2:
 			row.reparent(r)
 			#print("reparent")
+		r.modulate = Color.WHITE
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(row, "position", Vector2.ZERO, 0.2).set_ease(Tween.EASE_OUT)
 	
-	if slot_distances.find_key(slot_distances.values().min()):
-		slot_distances.find_key(slot_distances.values().min()).modulate = Color.WHITE
+	#if slot_distances.find_key(slot_distances.values().min()):
+		#slot_distances.find_key(slot_distances.values().min()).modulate = Color.WHITE
 
 func on_decided():	# This gets spammed a lot when holding the selected row still
 	if slot_distances.values().min() < 20:
@@ -98,5 +101,18 @@ func on_decided():	# This gets spammed a lot when holding the selected row still
 	decided = true
 
 
-#func on_clicked(row: Row):
-	#selected_slot.modulate = Color.WHITE if row.locked else Color.GRAY
+func on_clicked(row: Row):
+	row.reparent(selected_slot)
+	if multiplier:
+		selected_slot.modulate = Color.WHITE
+		locked = false
+		
+		$"/root/Main/SafeArea/GUI/GaussView".remove_child(multiplier)
+		multiplier = null
+	else:
+		selected_slot.modulate = Color.GRAY
+		locked = true
+		
+		multiplier = multiplier_scene.instantiate()
+		multiplier.row = row
+		$"/root/Main/SafeArea/GUI/GaussView".add_child(multiplier)
