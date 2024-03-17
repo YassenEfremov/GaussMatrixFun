@@ -1,3 +1,3 @@
-extends StaticBody2D
+class_name RowSlot extends StaticBody2D
 
-var row
+var row: Row

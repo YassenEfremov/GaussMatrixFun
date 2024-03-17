@@ -74,26 +74,10 @@ func on_dragged(row: Row, velocity: float):
 func row_dropped(row: Row):
 	selected_row = null
 	
-	#if closest_slot.get_children().size() <= 2:		# BAD CODE!!!
-		#row.reparent(closest_slot)
-	#else:
-		#row.reparent(selected_slot)
-	#closest_slot = null
-	
 	var closest = slot_distances.find_key(slot_distances.values().min())
 	if not swap and closest.get_children().size() > 2:	# BAD CODE!!!
 		# add/subtract here
-		for i in row.values.size():
-			closest.get_child(2).values[i] += row.values[i]
-			closest.get_child(2).get_node("Label%s" % (i+1)).text = str(closest.get_child(2).values[i])
-		
-		var row_gcd: int = Global.gcd(closest.get_child(2).values)
-		if row_gcd != 1:
-			var divider: Button = divider_scene.instantiate()
-			divider.row = closest.get_child(2)
-			divider.value = row_gcd
-			$"/root/Main/SafeArea/GUI/GaussView".add_child(divider)
-		
+		closest.get_child(2).add(row)
 		swap = true
 	
 	# Return the selected row back
@@ -104,7 +88,6 @@ func row_dropped(row: Row):
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(row, "position", Vector2.ZERO, 0.2).set_ease(Tween.EASE_OUT)
-	#print("zero")
 	
 	if slot_distances.find_key(slot_distances.values().min()):
 		slot_distances.find_key(slot_distances.values().min()).modulate = Color.WHITE

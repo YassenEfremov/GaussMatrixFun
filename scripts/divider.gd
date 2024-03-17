@@ -1,4 +1,4 @@
-extends Button
+class_name Divider extends Button
 
 
 var row: Row
@@ -15,3 +15,7 @@ func _process(delta):												# vv  not great  vv
 
 func _pressed():
 	queue_free()
+
+func update_value(new_value: int):
+	value = new_value
+	$Value.text = str(new_value)

@@ -7,6 +7,8 @@ var touched: bool = false
 var offset: Vector2
 var orig_pos: Vector2
 var t: Timer
+var divider: Divider = null
+var divider_scene = preload("res://scenes/divider.tscn")
 
 signal picked_up(row: Row, slot)
 signal dragged(row: Row, velocity: float)
@@ -45,10 +47,28 @@ func _on_area_2d_input_event(viewport, event, shape_idx):
 func _on_timer_timeout():
 	decided.emit()
 
+func add(row: Row):
+	for i in values.size():
+		values[i] += row.values[i]
+	update_labels()
+	
+	var row_gcd: int = Global.gcd(values)
+	if row_gcd != 1:
+		if divider:
+			divider.update_value(row_gcd)
+		else:
+			divider = divider_scene.instantiate()
+			divider.row = self
+			divider.value = row_gcd
+			$"/root/Main/SafeArea/GUI/GaussView".add_child(divider)
+	elif divider:
+		divider.queue_free()
+
 func divide(value: int):
 	for i in values.size():
-		values[i] /= value
+		values[i] /= divider.value	# for some reason the parameter "value" doesn't want to update??
 	update_labels()
+	divider = null
 
 func update_labels():
 	for i in values.size():

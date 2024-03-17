@@ -1,6 +1,5 @@
 extends Control
 
-#var selected_row
 
 func gcd2(a: int, b: int) -> int:
 	if a == 0: return b
