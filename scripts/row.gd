@@ -1,7 +1,12 @@
+@tool
 class_name Row extends Node2D
 
 
 @export var values: Array[int]
+@export var const_term: float:
+	set(value):
+		const_term = value
+		$ConstTerm.text = str(const_term)
 
 var touched: bool = false
 var offset: Vector2
@@ -16,7 +21,7 @@ signal dragged(row: Row, velocity: float)
 signal dropped(row: Row)
 signal decided
 signal clicked(row: Row)
-signal found_solution(x, i: int)
+signal found_solution(x: float, i: int)
 
 
 func _ready():
@@ -54,24 +59,28 @@ func _on_timer_timeout():
 func add(row: Row):
 	for i in values.size():
 		values[i] += row.values[i]
+	const_term += row.const_term
 	update_labels()
 	update_divider()
 
 func divide(value: int):
 	for i in values.size():
 		values[i] /= value
+	const_term /= value
 	update_labels()
 	divider = null
 
 func multiply(value: int):
 	for i in values.size():
 		values[i] *= value
+	const_term *= value
 	update_labels()
 	update_divider()
 
 func update_labels():
 	for i in values.size():
 		get_node("Label%d" % (i+1)).text = str(values[i])
+	$ConstTerm.text = str(const_term)
 	
 	var zeroes: int = 0
 	var solution_index: int
@@ -82,7 +91,7 @@ func update_labels():
 			solution_index = i
 	
 	if zeroes == values.size() - 1 and not solved:
-		found_solution.emit(0 / values[solution_index], solution_index + 1)
+		found_solution.emit(float(const_term) / values[solution_index], solution_index + 1)
 		solved = true
 
 func update_divider():

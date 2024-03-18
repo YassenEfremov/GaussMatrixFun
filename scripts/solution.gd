@@ -7,7 +7,7 @@ extends Control
 		solution_index = value
 		$SolutionIndex.text = str(solution_index)
 
-var solution: int:
+var solution: float:
 	set(value):
 		solution = value
 		$Value.text = str(solution)

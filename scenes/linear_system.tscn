@@ -17,24 +17,28 @@ position = Vector2(192, 32)
 
 [node name="1" parent="Rows/1" instance=ExtResource("3_j3dfa")]
 values = Array[int]([1, 2, 3, 4])
+const_term = 1
 
 [node name="2" parent="Rows" instance=ExtResource("2_ufvyo")]
 position = Vector2(192, 104)
 
 [node name="2" parent="Rows/2" instance=ExtResource("3_j3dfa")]
 values = Array[int]([0, 1, 1, 1])
+const_term = 1
 
 [node name="3" parent="Rows" instance=ExtResource("2_ufvyo")]
 position = Vector2(192, 176)
 
 [node name="3" parent="Rows/3" instance=ExtResource("3_j3dfa")]
 values = Array[int]([0, 0, 5, 2])
+const_term = 2
 
 [node name="4" parent="Rows" instance=ExtResource("2_ufvyo")]
 position = Vector2(192, 248)
 
 [node name="4" parent="Rows/4" instance=ExtResource("3_j3dfa")]
 values = Array[int]([0, 0, 0, 4])
+const_term = -1
 
 [node name="Dragging" type="Node2D" parent="."]
 

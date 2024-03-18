@@ -2,7 +2,7 @@ class_name LinearSystem extends Node2D
 
 
 #@export var two_dimensional: Array[Array] = [[1, 0], [0, 1]]
-var number_of_rows = 4
+var number_of_rows: int = 4
 
 var selected_row: Row
 var selected_slot: RowSlot
