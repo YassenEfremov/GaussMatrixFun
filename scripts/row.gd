@@ -9,12 +9,14 @@ var orig_pos: Vector2
 var t: Timer
 var divider: Divider = null
 var divider_scene := preload("res://scenes/divider.tscn")
+var solved: bool = false
 
 signal picked_up(row: Row, slot)
 signal dragged(row: Row, velocity: float)
 signal dropped(row: Row)
 signal decided
 signal clicked(row: Row)
+signal found_solution(x, i: int)
 
 
 func _ready():
@@ -70,6 +72,18 @@ func multiply(value: int):
 func update_labels():
 	for i in values.size():
 		get_node("Label%d" % (i+1)).text = str(values[i])
+	
+	var zeroes: int = 0
+	var solution_index: int
+	for i in range(values.size()):
+		if values[i] == 0:
+			zeroes += 1
+		else:
+			solution_index = i
+	
+	if zeroes == values.size() - 1 and not solved:
+		found_solution.emit(0 / values[solution_index], solution_index + 1)
+		solved = true
 
 func update_divider():
 	var row_gcd: int = Global.gcd(values)

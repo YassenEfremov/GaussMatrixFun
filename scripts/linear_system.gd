@@ -116,3 +116,7 @@ func on_clicked(row: Row):
 		multiplier = multiplier_scene.instantiate()
 		multiplier.row = row
 		$"/root/Main/SafeArea/GUI/GaussView".add_child(multiplier)
+
+
+func _on__found_solution(x, i):
+	get_node("Solutions/Solution%d" % i).solution = x
