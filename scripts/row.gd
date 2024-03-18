@@ -19,6 +19,7 @@ signal clicked(row: Row)
 
 func _ready():
 	update_labels()
+	update_divider()
 	t = $Timer
 
 func _unhandled_input(event):
