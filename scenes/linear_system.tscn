@@ -17,28 +17,28 @@ position = Vector2(192, 32)
 
 [node name="1" parent="Rows/1" instance=ExtResource("3_j3dfa")]
 values = Array[int]([1, 2, 3, 4])
-const_term = 1
+const_term = 1.0
 
 [node name="2" parent="Rows" instance=ExtResource("2_ufvyo")]
 position = Vector2(192, 104)
 
 [node name="2" parent="Rows/2" instance=ExtResource("3_j3dfa")]
 values = Array[int]([0, 1, 1, 1])
-const_term = 1
+const_term = 1.0
 
 [node name="3" parent="Rows" instance=ExtResource("2_ufvyo")]
 position = Vector2(192, 176)
 
 [node name="3" parent="Rows/3" instance=ExtResource("3_j3dfa")]
 values = Array[int]([0, 0, 5, 2])
-const_term = 2
+const_term = 2.0
 
 [node name="4" parent="Rows" instance=ExtResource("2_ufvyo")]
 position = Vector2(192, 248)
 
 [node name="4" parent="Rows/4" instance=ExtResource("3_j3dfa")]
 values = Array[int]([0, 0, 0, 4])
-const_term = -1
+const_term = -1.0
 
 [node name="Dragging" type="Node2D" parent="."]
 
@@ -73,6 +73,18 @@ solution_index = 3
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 solution_index = 4
+
+[node name="Win" type="Label" parent="."]
+visible = false
+offset_left = -64.0
+offset_top = 448.0
+offset_right = 448.0
+offset_bottom = 576.0
+theme_override_colors/font_color = Color(0, 0.588235, 0.313726, 1)
+theme_override_font_sizes/font_size = 64
+text = "System Solved!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="clicked" from="Rows/1/1" to="." method="on_clicked"]
 [connection signal="decided" from="Rows/1/1" to="." method="on_decided"]

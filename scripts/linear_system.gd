@@ -14,6 +14,8 @@ var multiplier: Multiplier = null
 var multiplier_scene := preload("res://scenes/multiplier.tscn")
 var locked: bool = false
 
+signal solved
+
 
 func shift_down(i):
 	if i == number_of_rows - 1: return
@@ -120,3 +122,9 @@ func on_clicked(row: Row):
 
 func _on__found_solution(x, i):
 	get_node("Solutions/Solution%d" % i).solution = x
+	for s in $Solutions.get_children():
+		if not s.solution:
+			return
+	
+	$Win.show()
+	solved.emit()
