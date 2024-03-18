@@ -2,7 +2,12 @@
 class_name Row extends Node2D
 
 
-@export var values: Array[int]
+@export var values: Array[int]:
+	set(value):
+		values = value
+		for i in values.size():
+			get_node("Label%d" % (i+1)).text = str(values[i])
+		
 @export var const_term: float:
 	set(value):
 		const_term = value
