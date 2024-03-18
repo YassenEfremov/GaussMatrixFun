@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnsjben6s5suq"]
+[gd_scene load_steps=3 format=3 uid="uid://cnsjben6s5suq"]
 
+[ext_resource type="FontFile" uid="uid://2odoyvlagkaj" path="res://assets/cmunrm.ttf" id="1_p62r6"]
 [ext_resource type="Script" path="res://scripts/divider.gd" id="1_y3cmh"]
 
 [node name="Divider" type="Button"]
 offset_right = 96.0
 offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_p62r6")
 script = ExtResource("1_y3cmh")
 
 [node name="Slash" type="Label" parent="."]
@@ -12,6 +14,7 @@ layout_mode = 1
 anchors_preset = -1
 offset_right = 32.0
 offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_p62r6")
 theme_override_font_sizes/font_size = 40
 text = "/"
 horizontal_alignment = 1
@@ -22,6 +25,7 @@ layout_mode = 1
 offset_left = 32.0
 offset_right = 96.0
 offset_bottom = 64.0
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("1_p62r6")
+theme_override_font_sizes/font_size = 46
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4uap0cpebp1o"]
+[gd_scene load_steps=8 format=3 uid="uid://c4uap0cpebp1o"]
 
 [ext_resource type="Script" path="res://scripts/multiplier.gd" id="1_3jc1n"]
+[ext_resource type="FontFile" uid="uid://2odoyvlagkaj" path="res://assets/cmunrm.ttf" id="1_41if7"]
 [ext_resource type="Texture2D" uid="uid://b0rgq8gienius" path="res://assets/checkmark.png" id="2_14t1d"]
 [ext_resource type="Texture2D" uid="uid://dcmqxqeg84g1x" path="res://assets/crossmark.png" id="3_aa41c"]
 
@@ -14,19 +15,33 @@ bg_color = Color(0.6, 0.6, 0.6, 0.6)
 
 [node name="Multiplier" type="Label"]
 anchors_preset = -1
-anchor_left = -0.0246914
-anchor_top = -0.0138889
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 40.0
-offset_bottom = 40.0
+anchor_left = -0.0743457
+anchor_top = -0.0419444
+anchor_right = 0.0743457
+anchor_bottom = 0.0419444
+offset_left = 0.176003
+offset_top = 0.32
+offset_right = -0.176003
+offset_bottom = -0.32
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 42
+theme_override_fonts/font = ExtResource("1_41if7")
+theme_override_font_sizes/font_size = 46
 theme_override_styles/normal = SubResource("StyleBoxFlat_24ijq")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_3jc1n")
 metadata/_edit_use_anchors_ = true
+
+[node name="Times" type="Label" parent="."]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_41if7")
+theme_override_font_sizes/font_size = 46
+text = "·"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Increase" type="Button" parent="."]
 layout_mode = 1
@@ -44,7 +59,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_qg7y4")
-text = ">"
+text = "+"
 metadata/_edit_use_anchors_ = true
 
 [node name="Decrease" type="Button" parent="."]
@@ -63,24 +78,24 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_qbgsi")
-text = "<"
+text = "-"
 metadata/_edit_use_anchors_ = true
 
 [node name="Apply" type="Button" parent="."]
 layout_mode = 0
-offset_left = -32.0
-offset_top = 96.0
-offset_right = 32.0
-offset_bottom = 160.0
+offset_left = -24.0
+offset_top = 112.0
+offset_right = 40.0
+offset_bottom = 176.0
 icon = ExtResource("2_14t1d")
 expand_icon = true
 
 [node name="Cancel" type="Button" parent="."]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 96.0
-offset_right = 112.0
-offset_bottom = 160.0
+offset_left = 56.0
+offset_top = 112.0
+offset_right = 120.0
+offset_bottom = 176.0
 icon = ExtResource("3_aa41c")
 expand_icon = true
 
