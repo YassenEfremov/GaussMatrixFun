@@ -12,7 +12,6 @@ var swap: bool = true
 var decided: bool = false
 var multiplier: Multiplier = null
 var multiplier_scene := preload("res://scenes/multiplier.tscn")
-var locked: bool = false
 
 signal solved
 
@@ -36,6 +35,14 @@ func move_row(from_i: int, to_i: int):
 	$Rows.get_child(from_i).get_child(2).reparent($Rows.get_child(to_i))
 	tween.tween_property($Rows.get_child(to_i).get_child(2), "position", Vector2.ZERO, 0.2).set_ease(Tween.EASE_OUT)
 	#print(from_i, " -> ", to_i)
+
+func lock():
+	for r in $Rows.get_children():
+		r.get_child(2).locked = true	# BAD CODE!!!
+
+func unlock():
+	for r in $Rows.get_children():
+		r.get_child(2).locked = false	# BAD CODE!!!
 
 func row_picked_up(row: Row, slot: RowSlot):
 	selected_row = row
@@ -102,23 +109,31 @@ func on_decided():	# This gets spammed a lot when holding the selected row still
 		swap = false
 	decided = true
 
-
 func on_clicked(row: Row):
 	row.reparent(selected_slot)
 	if multiplier:
 		selected_slot.modulate = Color.WHITE
-		locked = false
+		unlock()
 		
 		$"/root/Main/SafeArea/GUI/GaussView".remove_child(multiplier)
 		multiplier = null
 	else:
 		selected_slot.modulate = Color.GRAY
-		locked = true
+		lock()
 		
 		multiplier = multiplier_scene.instantiate()
 		multiplier.row = row
+		multiplier.applied.connect(on_multiplier_applied)
+		multiplier.canceled.connect(on_multiplier_canceled)
 		$"/root/Main/SafeArea/GUI/GaussView".add_child(multiplier)
 
+func on_multiplier_applied():
+	unlock()
+	multiplier = null
+
+func on_multiplier_canceled():
+	unlock()
+	multiplier = null
 
 func _on__found_solution(x, i):
 	get_node("Solutions/Solution%d" % i).solution = x

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://corkpix0760hw"]
+
+[node name="LevelIcon" type="Button"]
+custom_minimum_size = Vector2(0, 128)
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "Level"

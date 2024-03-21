@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://34gaqbn5exm0"]
+[gd_scene load_steps=6 format=3 uid="uid://34gaqbn5exm0"]
 
-[ext_resource type="PackedScene" uid="uid://cvydftk1bna3i" path="res://scenes/linear_system.tscn" id="1_8lx6l"]
 [ext_resource type="Script" path="res://scripts/safe_area.gd" id="1_q5smv"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="3_lvp7e"]
+[ext_resource type="Script" path="res://scripts/level_select.gd" id="4_fioit"]
+[ext_resource type="PackedScene" uid="uid://corkpix0760hw" path="res://scenes/level_icon.tscn" id="4_s5g47"]
+[ext_resource type="Script" path="res://scripts/gauss_view.gd" id="6_xe818"]
 
 [node name="Main" type="Node"]
 
-[node name="LinearSystem" parent="." instance=ExtResource("1_8lx6l")]
-position = Vector2(100, 400)
+[node name="Levels" type="Node2D" parent="."]
 
 [node name="SafeArea" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -20,7 +22,47 @@ script = ExtResource("1_q5smv")
 layout_mode = 2
 mouse_filter = 1
 
-[node name="GaussView" type="Control" parent="SafeArea/GUI"]
+[node name="MainMenu" type="Control" parent="SafeArea/GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("3_lvp7e")
+
+[node name="Title" type="Label" parent="SafeArea/GUI/MainMenu"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 128.0
+offset_bottom = 256.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Gauss Matrix Fun"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="SafeArea/GUI/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Start"
+
+[node name="DeterminantView" type="Control" parent="SafeArea/GUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +71,75 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="ColorRect" type="ColorRect" parent="SafeArea/GUI/GaussView"]
+[node name="LevelSelect" type="Control" parent="SafeArea/GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("4_fioit")
+
+[node name="Title" type="Label" parent="SafeArea/GUI/LevelSelect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "Select Level"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMainButton" type="Button" parent="SafeArea/GUI/LevelSelect"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 64
+text = "<"
+
+[node name="GridContainer" type="GridContainer" parent="SafeArea/GUI/LevelSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 192.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="LevelIcon1" parent="SafeArea/GUI/LevelSelect/GridContainer" instance=ExtResource("4_s5g47")]
+layout_mode = 2
+
+[node name="GaussView" type="Control" parent="SafeArea/GUI"]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("6_xe818")
+
+[node name="BackToLevelsButton" type="Button" parent="SafeArea/GUI/GaussView"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 64
+text = "<"
+
+[node name="ColorRect" type="ColorRect" parent="SafeArea/GUI"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -39,11 +149,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DeterminantView" type="Control" parent="SafeArea/GUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[connection signal="pressed" from="SafeArea/GUI/MainMenu/StartButton" to="SafeArea/GUI/MainMenu" method="_on_start_button_pressed"]
+[connection signal="pressed" from="SafeArea/GUI/LevelSelect/BackToMainButton" to="SafeArea/GUI/LevelSelect" method="_on_back_button_pressed"]
+[connection signal="pressed" from="SafeArea/GUI/GaussView/BackToLevelsButton" to="SafeArea/GUI/GaussView" method="_on_back_to_levels_button_pressed"]

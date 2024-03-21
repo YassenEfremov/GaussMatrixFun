@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv7m1mo0boqv4"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_3wg0m"]
+[ext_resource type="PackedScene" uid="uid://cvydftk1bna3i" path="res://scenes/linear_system.tscn" id="2_txu01"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_3wg0m")
+
+[node name="LinearSystem" parent="." instance=ExtResource("2_txu01")]
+position = Vector2(96, 320)
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="solved" from="LinearSystem" to="." method="_on_linear_system_solved"]

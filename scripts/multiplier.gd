@@ -4,6 +4,9 @@ class_name Multiplier extends Label
 var row: Row
 var value: int = 1
 
+signal applied
+signal canceled
+
 
 func _ready():
 	text = " %d" % value
@@ -24,12 +27,10 @@ func _on_increase_pressed():
 func _on_apply_pressed():
 	row.multiply(value)
 	row.get_parent().modulate = Color.WHITE
-	$"/root/Main/LinearSystem".locked = false
-	$"/root/Main/LinearSystem".multiplier = null	# Ughmm..
+	applied.emit()
 	queue_free()
 
 func _on_cancel_pressed():
 	row.get_parent().modulate = Color.WHITE
-	$"/root/Main/LinearSystem".locked = false
-	$"/root/Main/LinearSystem".multiplier = null	# # Ughmm..
+	canceled.emit()
 	queue_free()

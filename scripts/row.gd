@@ -20,6 +20,7 @@ var t: Timer
 var divider: Divider = null
 var divider_scene := preload("res://scenes/divider.tscn")
 var solved: bool = false
+var locked: bool = false
 
 signal picked_up(row: Row, slot)
 signal dragged(row: Row, velocity: float)
@@ -36,14 +37,14 @@ func _ready():
 
 func _unhandled_input(event):
 	# Dragging is done here because the other method stops being called if you drag too fast
-	if event is InputEventScreenDrag and touched and not $"/root/Main/LinearSystem".locked:	# BAD
+	if event is InputEventScreenDrag and touched and not locked:	# BAD
 		global_position = event.position + offset
 		dragged.emit(self, event.velocity.length())
 	
 		t.start(t.wait_time)
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
-	if event is InputEventScreenTouch and not $"/root/Main/LinearSystem".locked:	# BAD
+	if event is InputEventScreenTouch and not locked:	# BAD
 		if event.pressed:
 			orig_pos = event.position
 			picked_up.emit(self, get_parent())
