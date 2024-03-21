@@ -3,7 +3,14 @@
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_3wg0m"]
 [ext_resource type="PackedScene" uid="uid://cvydftk1bna3i" path="res://scenes/linear_system.tscn" id="2_txu01"]
 
-[node name="Level1" type="Node2D"]
+[node name="Level1" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_3wg0m")
 
 [node name="LinearSystem" parent="." instance=ExtResource("2_txu01")]

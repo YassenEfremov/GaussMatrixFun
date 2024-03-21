@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://corkpix0760hw"]
+[gd_scene load_steps=2 format=3 uid="uid://corkpix0760hw"]
+
+[ext_resource type="FontFile" uid="uid://4ea8u73mvsge" path="res://assets/cmunti.ttf" id="1_jb0lk"]
 
 [node name="LevelIcon" type="Button"]
 custom_minimum_size = Vector2(0, 128)
@@ -7,5 +9,7 @@ offset_top = -64.0
 offset_right = 64.0
 offset_bottom = 64.0
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_jb0lk")
+theme_override_font_sizes/font_size = 40
 text = "Level"

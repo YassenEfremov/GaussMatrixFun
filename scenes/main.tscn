@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://34gaqbn5exm0"]
+[gd_scene load_steps=9 format=3 uid="uid://34gaqbn5exm0"]
 
 [ext_resource type="Script" path="res://scripts/safe_area.gd" id="1_q5smv"]
+[ext_resource type="FontFile" uid="uid://2odoyvlagkaj" path="res://assets/cmunrm.ttf" id="3_a7i7y"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="3_lvp7e"]
 [ext_resource type="Script" path="res://scripts/level_select.gd" id="4_fioit"]
 [ext_resource type="PackedScene" uid="uid://corkpix0760hw" path="res://scenes/level_icon.tscn" id="4_s5g47"]
+[ext_resource type="FontFile" uid="uid://4ea8u73mvsge" path="res://assets/cmunti.ttf" id="4_wkxn2"]
 [ext_resource type="Script" path="res://scripts/gauss_view.gd" id="6_xe818"]
+[ext_resource type="Texture2D" uid="uid://cstmb4cp8ijvr" path="res://assets/grid.png" id="7_kx7rq"]
 
 [node name="Main" type="Node"]
 
@@ -40,7 +43,8 @@ offset_top = 128.0
 offset_bottom = 256.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("3_a7i7y")
+theme_override_font_sizes/font_size = 72
 text = "Gauss Matrix Fun"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -58,7 +62,9 @@ offset_right = 128.0
 offset_bottom = 192.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_wkxn2")
+theme_override_font_sizes/font_size = 64
 text = "Start"
 
 [node name="DeterminantView" type="Control" parent="SafeArea/GUI"]
@@ -86,10 +92,12 @@ script = ExtResource("4_fioit")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 160.0
+offset_top = 128.0
+offset_bottom = 256.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 46
+theme_override_fonts/font = ExtResource("3_a7i7y")
+theme_override_font_sizes/font_size = 52
 text = "Select Level"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -109,7 +117,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 64.0
-offset_top = 192.0
+offset_top = 320.0
 offset_right = -64.0
 offset_bottom = -64.0
 grow_horizontal = 2
@@ -139,15 +147,19 @@ offset_bottom = 128.0
 theme_override_font_sizes/font_size = 64
 text = "<"
 
-[node name="ColorRect" type="ColorRect" parent="SafeArea/GUI"]
-z_index = -1
+[node name="TextureRect" type="TextureRect" parent="SafeArea/GUI"]
+z_index = -2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -188.0
+offset_right = 188.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("7_kx7rq")
+expand_mode = 3
 
 [connection signal="pressed" from="SafeArea/GUI/MainMenu/StartButton" to="SafeArea/GUI/MainMenu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="SafeArea/GUI/LevelSelect/BackToMainButton" to="SafeArea/GUI/LevelSelect" method="_on_back_button_pressed"]
